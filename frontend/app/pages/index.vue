@@ -5,6 +5,22 @@
   const url = ref("https://tehnosvar.ru/products/svarochniemachiny/tochechnaya/tochechnay/100/")
   const result = ref(null)
 
+  const highlightWords = (value) => {
+    if (!value) return ''
+
+    const escaped = String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+
+    return escaped.replace(
+      /(?<![\p{L}\p{N}_])(машина|переменным)(?![\p{L}\p{N}_])/giu,
+      '<mark class="bg-yellow-300 text-gray-900 px-0.5">$1</mark>'
+    )
+  }
+
   const checkSecret = async () => {
     const data = await $fetch(`${config.public.baseURL}/seo/meta`, {
       method: 'POST',
@@ -14,6 +30,7 @@
     })
     console.log(data)
     result.value = data
+    url.value = null
   }
 
 </script>
@@ -22,13 +39,13 @@
 <template>
   <div class="bg-gray-700 h-screen text-white mx-auto px-12 py-4">
     <p class="text-white text-4xl mb-6">Анализ SEO</p>
-    <input v-model="url" type="text" placeholder="Введите адрес страницы" class="mb-4 p-2 rounded text-black w-full"/>
+    <input v-model="url" type="text" placeholder="Вставьте url адрес страницы" class="mb-4 p-2 rounded text-black w-full"/>
 
     <button @click="checkSecret" class="bg-blue-500 text-white px-4 py-2 rounded">Проверить META-теги</button>
 
     <div v-if="result" class="mt-6">
 
-      <div class="bg-gray-800 p-4 rounded-xl">
+      <div class="bg-gray-800 p-4 rounded-xl shadow-md shadow-black/40">
         <p class="text-xs text-gray-400">Техническая информация для отладки:</p>
         <div class="">
           <p  class="py-1 text-xs">{{ result }}</p>          
@@ -46,7 +63,7 @@
     </div>
 
 
-      <div class="bg-gray-800 p-4 rounded-xl mt-6">
+      <div class="bg-gray-800 p-4 rounded-xl shadow-md shadow-black/40 mt-6">
         <div class="grid grid-cols-1 gap-8">
 
           <div class="grid grid-cols-1 gap-1">
@@ -63,8 +80,9 @@
               <p>МЕТА описание (description):</p>
             </div>
             <div class="text-base text-gray-100">
+              <!-- <p v-html="highlightWords(result.description)"></p> -->
               <p>{{ result.description }}</p>
-            </div>      
+            </div>
           </div>
 
           <div class="grid grid-cols-1 gap-1">
