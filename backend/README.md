@@ -8,7 +8,7 @@
 - HTTP-статус и финальный URL (после редиректов)
 - `title`
 - `description`, `keywords`, `robots`
-- `canonical`
+- `cuserical`
 - `charset`, `language`, `viewport`
 - `favicon`
 - Open Graph (`og:*`)
@@ -33,6 +33,10 @@ pip install fastapi uvicorn httpx beautifulsoup4 lxml
 
 ```bash
 uvicorn app:app --reload --host 0.0.0.0 --port 8000
+
+# or
+
+uvicorn app:app --reload
 ```
 
 3. Открыть Swagger UI:
@@ -69,7 +73,7 @@ curl -X POST "http://localhost:8000/seo/meta" \
   "description": "...",
   "keywords": null,
   "robots": null,
-  "canonical": null,
+  "cuserical": null,
   "charset": "utf-8",
   "language": "en",
   "viewport": "width=device-width, initial-scale=1",
@@ -89,6 +93,27 @@ curl -X POST "http://localhost:8000/seo/meta" \
   }
 }
 ```
+
+```zsh
+sudo nano /etc/systemd/system/seo-crawler.service
+
+[Unit]
+Description=FastAPI application
+After=network.target
+
+[Service]
+User=user
+Group=user
+WorkingDirectory=/home/user/meinewelt/fastapi
+ExecStart=/home/user/meinewelt/fastapi/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8080 --workers 1
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+```
+
+
 
 ## Ограничения текущей версии
 
