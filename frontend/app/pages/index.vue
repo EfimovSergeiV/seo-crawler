@@ -37,7 +37,7 @@
 
 
 <template>
-  <div class="bg-gray-700 h-screen text-white mx-auto px-12 py-4">
+  <div class="bg-gray-700 min-h-screen text-white mx-auto px-12 py-4">
     <p class="text-white text-4xl mb-6">Анализ SEO</p>
     <input v-model="url" type="text" placeholder="Вставьте url адрес страницы" class="mb-4 p-2 rounded text-black w-full"/>
 
@@ -45,22 +45,15 @@
 
     <div v-if="result" class="mt-6">
 
-      <div class="bg-gray-800 p-4 rounded-xl shadow-md shadow-black/40">
-        <p class="text-xs text-gray-400">Техническая информация для отладки:</p>
-        <div class="">
-          <p  class="py-1 text-xs">{{ result }}</p>          
+
+      <div class="grid grid-cols-1 gap-1 mt-6 px-0.5">
+        <div class="text-sm text-gray-400">
+          <p>Заголовок (H1): </p>
         </div>
+        <div class="text-xl text-gray-100">
+          <p>{{ result.h1 }}</p>
+        </div>      
       </div>
-
-
-    <div class="grid grid-cols-1 gap-1 mt-6 px-0.5">
-      <div class="text-sm text-gray-400">
-        <p>Заголовок (H1): </p>
-      </div>
-      <div class="text-xl text-gray-100">
-        <p>{{ result.h1 }}</p>
-      </div>      
-    </div>
 
 
       <div class="bg-gray-800 p-4 rounded-xl shadow-md shadow-black/40 mt-6">
@@ -70,8 +63,9 @@
             <div class="text-sm text-gray-400">
               <p>МЕТА заголовок (title): </p>
             </div>
-            <div class="text-base text-gray-100">
+            <div class="grid grid-cols-1 gap-2 text-base text-gray-100">
               <p>{{ result.title }}</p>
+              <p class="text-xs text-gray-500">Кол-во символов: {{ result.title.length }} / Рекомендуемое: 50-60</p>
             </div>      
           </div>
             
@@ -79,9 +73,10 @@
             <div class="text-sm text-gray-400">
               <p>МЕТА описание (description):</p>
             </div>
-            <div class="text-base text-gray-100">
+            <div class="grid grid-cols-1 gap-2 text-base text-gray-100">
               <!-- <p v-html="highlightWords(result.description)"></p> -->
               <p>{{ result.description }}</p>
+              <p class="text-xs text-gray-500">Кол-во символов: {{ result.description.length }} / Рекомендуемое: 150-160</p>
             </div>
           </div>
 
@@ -89,15 +84,40 @@
             <div class="text-sm text-gray-400">
               <p>МЕТА ключевые слова (keywords):</p>
             </div>
-            <div class="text-base text-gray-100">
+            <div class="grid grid-cols-1 gap-2 text-base text-gray-100">
               <p>{{ result.keywords }}</p>
+              <p class="text-xs text-gray-500">Кол-во символов: {{ result.keywords.length }} / Рекомендуемое: 150-160</p>
             </div>      
           </div>
         </div>
 
 
-
       </div>
+
+
+
+
+
+      <div class="grid grid-cols-1 gap-1 mt-6 px-0.5">
+        <div class="py-4">
+          <p class="text-xl text-gray-100">Обзор от ИИ: </p>
+        </div>     
+      </div>
+      <div class="bg-gray-800 p-4 rounded-xl shadow-md shadow-black/40 min-h-52">
+        <p class="text-xs text-gray-100">Анализ SEO заданной страницы...</p>
+      </div>
+
+
+
+
+
+      <div class="bg-gray-800 p-4 rounded-xl shadow-md shadow-black/40 mt-24">
+        <p class="text-xs text-gray-400">Техническая информация для отладки:</p>
+        <div class="">
+          <p  class="py-1 text-xs">{{ result }}</p>          
+        </div>
+      </div>
+
 
 
     </div>
