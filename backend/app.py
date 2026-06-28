@@ -74,6 +74,8 @@ async def seo_meta(request: URLRequest):
 
         "title": soup.title.string.strip() if soup.title else None,
 
+        "h1": soup.find("h1").get_text(strip=True) if soup.find("h1") else None,
+
         "description": meta(soup, "description"),
         "keywords": meta(soup, "keywords"),
         "robots": meta(soup, "robots"),

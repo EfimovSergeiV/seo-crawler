@@ -36,6 +36,16 @@
       </div>
 
 
+    <div class="grid grid-cols-1 gap-1 mt-6 px-0.5">
+      <div class="text-sm text-gray-400">
+        <p>Заголовок (H1): </p>
+      </div>
+      <div class="text-xl text-gray-100">
+        <p>{{ result.h1 }}</p>
+      </div>      
+    </div>
+
+
       <div class="bg-gray-800 p-4 rounded-xl mt-6">
         <div class="grid grid-cols-1 gap-8">
 
