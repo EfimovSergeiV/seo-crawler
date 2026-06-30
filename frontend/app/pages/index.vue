@@ -1,10 +1,10 @@
 <script setup>
 
-
   import { ref, nextTick, onMounted, onBeforeUnmount } from 'vue'
 
-  const WS_URL = 'ws://localhost:8000/ws/chat'
 
+
+  const config = useRuntimeConfig()
 
   const messages = ref([])
   const input = ref('')
@@ -36,7 +36,7 @@
   }
 
   function connect() {
-    ws.value = new WebSocket(WS_URL)
+    ws.value = new WebSocket(`${config.public.SOCKET}/ws/chat`)
 
     ws.value.onmessage = (e) => {
       const data = JSON.parse(e.data)
@@ -135,7 +135,7 @@
 
 
 
-  const config = useRuntimeConfig()
+
 
   const url = ref(null)
 
