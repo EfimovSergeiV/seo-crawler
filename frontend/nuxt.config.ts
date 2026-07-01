@@ -16,7 +16,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       baseURL: "http://127.0.0.1:8000",
-      SOCKET: "ws://127.0.0.1:8000/ws/chat",
+      SOCKET: "ws://127.0.0.1:8000",
     },
   },
 
