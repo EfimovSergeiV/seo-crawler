@@ -165,12 +165,12 @@
         url: url.value
       },
     })
-    console.log(data)
+
     result.value = data
     url.value = null
     messages.value = []
     getData.value = false
-    send()
+    // send()
   }
 
 </script>
@@ -291,7 +291,7 @@
           @click="send"
         >
           Анализировать
-        </button>          
+        </button>
       </div> -->
 
 

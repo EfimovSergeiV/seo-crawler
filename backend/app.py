@@ -57,7 +57,7 @@ async def seo_meta(request: URLRequest):
 
     soup = BeautifulSoup(response.text, "lxml")
 
-    # print(f"[INFO] Fetched {response.url} with status {response.status_code} \n {response.text[:200]} ...")
+    print(f"[INFO] Fetched {response.url} with status {response.status_code} \n {response.text[:200]} ...")
 
     favicon = None
 
@@ -115,7 +115,6 @@ async def seo_meta(request: URLRequest):
             "image": meta(soup, "twitter:image"),
         }
     }
-    print(f"[INFO] SEO meta extracted: {result}")
 
     return result
 
