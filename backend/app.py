@@ -57,7 +57,7 @@ async def seo_meta(request: URLRequest):
 
     soup = BeautifulSoup(response.text, "lxml")
 
-    print(f"[INFO] Fetched {response.url} with status {response.status_code} \n {response.text[:200]} ...")
+    # print(f"[INFO] Fetched {response.url} with status {response.status_code} \n {response.text[:200]} ...")
 
     favicon = None
 
@@ -128,7 +128,7 @@ from pathlib import Path
 
 SERVER_API_HOST = "14.0.0.5:1234"
 lms.configure_default_client(SERVER_API_HOST)
-model = lms.llm("google/gemma-3-4b")
+model = lms.llm("openai/gpt-oss-20b")
 
 REPLACEMENTS_FILE = Path("replacements.json")
 
